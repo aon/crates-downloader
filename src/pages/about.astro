@@ -1,0 +1,41 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Crates Downloader">
+  <main class="container">
+    <h1>🦀 Crates Downloader</h1>
+
+    <h2>Why?</h2>
+    <p>
+      This website is made to make easy downloading some crates that don't have
+      a published repository.
+    </p>
+
+    <h2>How does it work?</h2>
+    <p>
+      In order to use it, you just have to paste your <u>docs.rs</u> or <u
+        >crates.io</u
+      > url. Something like this: <a href="https://docs.rs/tokio/1.23.0/tokio"
+        >https://docs.rs/tokio/1.23.0/tokio</a
+      >. Or this: <a href="https://crates.io/crates/tokio"
+        >https://crates.io/crates/tokio</a
+      >.
+    </p>
+    <p>
+      First, it checks the version in the URL. In the case of the first url,
+      it'll just download the version <mark>1.23.0</mark>. In the second case,
+      or if the version is <mark>latest</mark>, it'll get the latest published
+      version using the <a href="https://crates.io/api/v1/crates"
+        >crates.io API</a
+      >.
+    </p>
+    <p>Finally, it redirects you to the official download page.</p>
+
+    <h2>The downloaded file has a .crate extension... what?</h2>
+    <p>It is a <i>.tar.gz</i>. Just rename it.</p>
+  </main>
+
+</Layout>
+
+<style></style>

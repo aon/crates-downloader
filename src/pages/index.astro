@@ -1,0 +1,60 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Crates Downloader">
+  <main class="container">
+    <section>
+      <h1>🦀 Crates Downloader</h1>
+      <p>
+        To get started, just paste your <mark>crates.io</mark> or <mark
+          >docs.rs</mark
+        > down below 👇
+      </p>
+    </section>
+    <form id="form">
+      <section>
+        <input
+          type="text"
+          id="form-link"
+          name="form-link"
+          placeholder="e.g.: https://docs.rs/tokio/latest/tokio/"
+          required
+        />
+        <small><a href="/about" class="primary">How does it work?</a></small>
+      </section>
+      <button type="submit" id="form-button">Download</button>
+    </form>
+  </main>
+
+  <script>
+    import { urlSchema, getDownloadUrl } from "../utils/form";
+
+    const form = document.getElementById("form") as HTMLFormElement;
+    const input = document.getElementById("form-link") as HTMLInputElement;
+    const button = document.getElementById("form-button") as HTMLButtonElement;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const result = urlSchema.safeParse(input.value);
+      if (!result.success) return;
+
+      button.setAttribute("aria-busy", "true");
+      const url = await getDownloadUrl(result.data);
+      window.open(url);
+      button.setAttribute("aria-busy", "false");
+    });
+
+    input.addEventListener("input", (e: Event) => {
+      const value = (e.target as HTMLInputElement).value;
+      const result = urlSchema.safeParse(value);
+      if (result.success) {
+        input.setAttribute("aria-invalid", "false");
+        button.disabled = false;
+      } else {
+        input.setAttribute("aria-invalid", "true");
+        button.disabled = true;
+      }
+    });
+  </script>
+</Layout>
