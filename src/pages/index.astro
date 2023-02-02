@@ -26,7 +26,11 @@ import Layout from "../layouts/Layout.astro";
       <button type="submit" id="form-button">Download</button>
     </form>
   </main>
-
+  <style>
+    main {
+      flex: 1;
+    }
+  </style>
   <script>
     import { urlSchema, getDownloadUrl } from "../utils/form";
 
