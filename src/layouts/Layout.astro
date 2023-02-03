@@ -46,6 +46,11 @@ const { title } = Astro.props;
         ],
       }}
     />
+    <script
+      defer
+      data-domain="cratesdownloader.xyz"
+      src="https://plausible.io/js/script.js"
+    ></script>
   </head>
   <body>
     <slot />
@@ -57,6 +62,7 @@ const { title } = Astro.props;
         >
       </small>
     </footer>
+
     <style>
       body {
         min-height: 100vh;
