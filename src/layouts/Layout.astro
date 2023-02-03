@@ -1,4 +1,6 @@
 ---
+import { SEO } from "astro-seo";
+
 export interface Props {
   title: string;
 }
@@ -9,12 +11,41 @@ const { title } = Astro.props;
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/pico.min.css" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <SEO
+      title={title}
+      description="A simple website to download Rust crates from crates.io"
+      charset="UTF-8"
+      openGraph={{
+        basic: {
+          type: "website",
+          title: "Crates Downloader - a simple website to download Rust crates",
+          image: "https://cratesdownloader.xyz/og.png",
+          url: "https://cratesdownloader.xyz",
+        },
+        optional: {
+          description:
+            "A simple website to download Rust crates from crates.io",
+        },
+        image: {
+          alt: "Crates Downloader logo, a crab emoji",
+        },
+      }}
+      twitter={{
+        creator: "@agustin_aon",
+        title: "Crates Downloader",
+        description: "A simple website to download Rust crates from crates.io",
+        image: "https://cratesdownloader.xyz/og.png",
+        imageAlt: "Crates Downloader logo, a crab emoji",
+        card: "summary",
+      }}
+      extend={{
+        meta: [{ name: "viewport", content: "width=device-width" }],
+        link: [
+          { rel: "icon", type: "image/svg+xml", href: "/favicon.ico" },
+          { rel: "stylesheet", href: "/css/pico.min.css" },
+        ],
+      }}
+    />
   </head>
   <body>
     <slot />
@@ -26,17 +57,17 @@ const { title } = Astro.props;
         >
       </small>
     </footer>
+    <style>
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+    <style is:global>
+      h1 a:link {
+        text-decoration: none;
+      }
+    </style>
   </body>
 </html>
-<style>
-  body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-</style>
-<style is:global>
-  h1 a:link {
-    text-decoration: none;
-  }
-</style>
