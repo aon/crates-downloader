@@ -46,38 +46,24 @@ const { title } = Astro.props;
         ],
       }}
     />
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8VJ54ZC76W"
-    ></script>
-    <script>
-      // @ts-ignore
-      window.dataLayer = window.dataLayer || [];
-
-      function gtag() {
-        // @ts-ignore
-        dataLayer.push(arguments);
-      }
-      // @ts-ignore
-      gtag("js", new Date());
-
-      // @ts-ignore
-      gtag("config", "G-8VJ54ZC76W");
+    <script type="text/javascript">
+      new Image().src =
+        "https://nullitics.com/n.gif?u=" +
+        encodeURI(location.href) +
+        "&r=" +
+        encodeURI(document.referrer) +
+        "&d=" +
+        screen.width;
     </script>
-
-    <!-- <script
-      defer
-      data-domain="cratesdownloader.xyz"
-      src="https://plausible.io/js/script.js"
-    ></script> -->
   </head>
   <body>
     <slot />
     <footer class="container">
       <hr />
       <small>
-        Built by <a href="https://github.com/aon">aon</a> • <a
-          href="https://github.com/aon/crates-downloader">Source code</a
+        Built by <a href="https://github.com/aon" id="github-personal">aon</a> •
+        <a href="https://github.com/aon/crates-downloader" id="github-repo"
+          >Source code</a
         >
       </small>
     </footer>
@@ -94,5 +80,14 @@ const { title } = Astro.props;
         text-decoration: none;
       }
     </style>
+    <script>
+      import { trackPersonalGithub, trackRepoGithub } from "../utils/analytics";
+
+      const githubPersonal = document.getElementById("github-personal");
+      githubPersonal?.addEventListener("click", trackPersonalGithub);
+
+      const githubRepo = document.getElementById("github-repo");
+      githubRepo?.addEventListener("click", trackRepoGithub);
+    </script>
   </body>
 </html>
