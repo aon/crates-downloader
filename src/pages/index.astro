@@ -32,6 +32,7 @@ import Layout from "../layouts/Layout.astro";
     }
   </style>
   <script>
+    import { trackDownload } from "../utils/analytics";
     import { urlSchema, getDownloadUrl } from "../utils/form";
 
     const form = document.getElementById("form") as HTMLFormElement;
@@ -44,6 +45,7 @@ import Layout from "../layouts/Layout.astro";
       if (!result.success) return;
 
       button.setAttribute("aria-busy", "true");
+      trackDownload();
       const url = await getDownloadUrl(result.data);
       window.open(url);
       button.setAttribute("aria-busy", "false");
